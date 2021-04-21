@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+    <html>
+
+    <head>
+        <meta charset="utf-8" />
+        <meta name=viewport content="width=device-width,initial-scale=1,maximum-scale=1,minimum-scale=1,user-scalable=no,minimal-ui,viewport-fit=cover">
+        <meta name=apple-mobile-web-app-capable content=yes>
+        <meta name=apple-mobile-web-app-status-bar-style content=black>
+        <title>Property Inspector Samples PI</title>
+        <link rel="stylesheet" href="css/sdpi.css">
+        <!--link rel="stylesheet" 
+              media="screen and (max-width: 1025px)" 
+              href="css/local.css" -->
+
+    </head>
+
+    <body>
+        <div class="sdpi-wrapper">
+
+            <div id="dvTextAreas">
+                <div type="textarea" class="sdpi-item" id="inputText_div">
+                    <div class="sdpi-item-label">Macro d'appui court</div>
+                    <span class="sdpi-item-value textarea">
+                        <textarea type="textarea" oninput="setSettings()" class="sdProperty" id="inputText"></textarea>
+                    </span>
+                </div>
+                <details class="message">
+                    <summary>Capturer Touche: <button class="sdpi-item-value max40" id="inputTextCaptureKeystroke" onclick="captureKeystroke('inputText')">Capture</button><button class="sdpi-item-value max40" id="inputTextCancelCapture" onclick="cancelCapture()" style="display:none;">🔴 Cancel</button></summary>
+                </details>
+                <div type="textarea" class="sdpi-item" id="inputText_div">
+                    <div class="sdpi-item-label">Macro d'apui long</div>
+                    <span class="sdpi-item-value textarea">
+                        <textarea type="textarea" oninput="setSettings()" class="sdProperty" id="longPressInputText"></textarea>
+                    </span>
+                </div>
+                <details class="message">
+                    <summary>Capturer Touche: <button class="sdpi-item-value max40" id="longPressInputTextCaptureKeystroke" onclick="captureKeystroke('longPressInputText')">Capture</button><button class="sdpi-item-value max40" id="longPressInputTextCancelCapture" onclick="cancelCapture()" style="display:none;">🔴 Cancel</button></summary>
+                </details>
+                <script>
+                    $('#inputText').highlightWithinTextarea({
+                        highlight: /\{(\{[^\{\}]+\})+\}/gi
+                    });
+                    $("#inputText").focus(function () {
+                        $("#inputText").trigger("input.hwt");
+                    });
+    
+    
+                    $('#longPressInputText').highlightWithinTextarea({
+                        highlight: /\{(\{[^\{\}]+\})+\}/gi
+                    });
+                    $("#longPressInputText").focus(function () {
+                        $("#longPressInputText").trigger("input.hwt");
+                    });
+                </script>
+            </div>
+            <div type="range" class="sdpi-item sdShowTooltip" id="dvLongKeypressTime">
+                <div class="sdpi-item-label" id="longKeypressTimeTitle">Délai de l'appui long</div>
+                <div class="sdpi-item-value">
+                    <span class="clickable" value="150">150</span>
+                    <input type="range" min="150" max="1000" value=150 list="numbers" data-suffix=" ms" class="sdProperty" id="longKeypressTime" oninput="setSettings()">
+                    <span class="clickable" value="1000">1000</span>
+                    <datalist id="numbers">
+                        <option>1000</option>
+                    </datalist>
+                    <label for="longKeypressTime" class="rangeLabel"></label>
+                </div>
+            </div>
+            <div type="range" class="sdpi-item sdShowTooltip" id="delay_div">
+                <div class="sdpi-item-label">Delay d'exécution</div>
+                <div class="sdpi-item-value">
+                    <span class="clickable" value="1">1</span>
+                    <input type="range" min="1" max="2000" data-suffix=" ms" value="1" class="sdProperty" oninput="setSettings()" id="delay">
+                    <span class="clickable" value="2000">2000</span>
+                    <label for="delay" class="rangeLabel"></label>
+                </div>
+            </div>
+            <div class="sdpi-item">
+                <span class="titleAlignedSmall">(Utilisez "gauche/droite" pour être plus précis)</span>
+            </div>
+            <div class="sdpi-item" id="your_name">
+                <div class="sdpi-item-label">URL </div> 
+                <input class="sdpi-item-value" type="text" id="mynameinput" value="">
+            </div>
+           
+        </div>
+        <div class="sdpi-info-label hidden" style="top: -1000;" value=""></div>
+
+        <!-- <script src="echomd.js"></script> -->
+        <script src="index_pi.js"></script>
+
+    </body>
+
+    </html>
